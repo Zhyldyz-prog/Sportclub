@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Airplane>
+@{
+    ViewData["Title"] = "Airplanes";
+}
+
+<h2>Список самолетов</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Название</th>
+            <th>Аэропарк</th>
+            <th>Номер борта</th>
+            <th>Регистрационный номер</th>
+            <th>Вместимость</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Airpark?.Name</td>
+                <td>@item.Airnumber</td>
+                <td>@item.Regisnumber</td>
+                <td>@item.Vmestimost</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Airplane/Create" class="btn btn-primary">Добавить самолет</a>

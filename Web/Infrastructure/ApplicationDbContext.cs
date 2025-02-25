@@ -12,5 +12,7 @@ namespace Infrastructure.Data
 
         // Добавление DbSet для Airpark
         public DbSet<Airpark> Airparks { get; set; }
+        public DbSet<Airplane> Airplanes { get; set; }
+
     }
 }

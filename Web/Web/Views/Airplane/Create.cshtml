@@ -1,0 +1,40 @@
+﻿@model Airplane
+
+<h2>Добавить самолет</h2>
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Name">Название</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AirparkId">Аэропарк</label>
+        <select asp-for="AirparkId" asp-items="ViewBag.Airparks" class="form-control">
+            <option value="">Выберите аэропарк</option>
+        </select>
+        <span asp-validation-for="AirparkId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Airnumber">Номер борта</label>
+        <input asp-for="Airnumber" class="form-control" />
+        <span asp-validation-for="Airnumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Regisnumber">Регистрационный номер</label>
+        <input asp-for="Regisnumber" class="form-control" />
+        <span asp-validation-for="Regisnumber" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Vmestimost">Вместимость</label>
+        <input asp-for="Vmestimost" class="form-control" />
+        <span asp-validation-for="Vmestimost" class="text-danger"></span>
+    </div>
+
+
+    <button type="submit" class="btn btn-success">Сохранить</button>
+
+</form>
+<a href="/Airplane/Index" class="btn btn-secondary">Назад</a>
