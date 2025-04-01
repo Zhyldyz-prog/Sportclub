@@ -1,5 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
+<PropertyGroup>
+    <UserSecretsId>253840673856-m44h5nk34fpj66r5rve1nr1iudvad179.apps.googleusercontent.com</UserSecretsId>
+</PropertyGroup>
+
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
