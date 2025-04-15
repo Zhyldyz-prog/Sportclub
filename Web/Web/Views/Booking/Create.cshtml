@@ -1,0 +1,26 @@
+﻿@model Web.Models.BookingViewModel
+
+@{
+    ViewData["Title"] = "Подтверждение бронирования";
+}
+
+<h2 class="text-center my-4">✅ Подтверждение бронирования</h2>
+
+<div class="container">
+    <div class="card border-success shadow-sm">
+        <div class="card-body">
+            <p><strong>👤 Пользователь:</strong> @Model.UserName</p>
+            <p><strong>✈️ Рейс:</strong> @Model.Flight.Country</p>
+            <p><strong>🕒 Вылет:</strong> @Model.Flight.DepartureTime.ToString("dd.MM.yyyy HH:mm")</p>
+            <p><strong>🛩 Самолёт:</strong> @Model.Flight.Airplane?.Name</p>
+            <p><strong>🎟 Класс:</strong> @Model.Flight.Class</p>
+            <p><strong>🧳 Багаж:</strong> @Model.Flight.Baggage</p>
+
+            <form asp-action="Confirm" method="post">
+                <input type="hidden" name="flightId" value="@Model.Flight.Id" />
+                <button type="submit" class="btn btn-success">Подтвердить бронирование</button>
+                <a asp-controller="Flight" asp-action="Index" class="btn btn-secondary ml-2">Назад</a>
+            </form>
+        </div>
+    </div>
+</div>

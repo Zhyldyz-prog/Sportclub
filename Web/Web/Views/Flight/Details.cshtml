@@ -1,0 +1,25 @@
+﻿@model Web.Entities.Flight
+
+@{
+    ViewData["Title"] = "Детали рейса";
+}
+
+<h2 class="text-center my-4">📅 Детали рейса</h2>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">✈️ Рейс в @Model.Country</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>🕒 Вылет:</strong> @Model.DepartureTime.ToString("dd.MM.yyyy HH:mm")</p>
+            <p><strong>🛩 Самолёт:</strong> @Model.Airplane?.Name ?? "Нет данных"</p>
+            <p><strong>🎟 Класс:</strong> @Model.Class</p>
+            <p><strong>🧳 Багаж:</strong> @Model.Baggage</p>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Редактировать</a>
+            <a asp-action="Index" class="btn btn-primary">Назад</a>
+        </div>
+    </div>
+</div>

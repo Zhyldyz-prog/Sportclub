@@ -1,0 +1,54 @@
+﻿
+@model List<Web.Entities.Flight>
+
+@{
+    ViewData["Title"] = "Доступные рейсы";
+}
+
+<h2 class="text-center my-4">🌍 Доступные авиарейсы</h2>
+
+<div class="container">
+    <div class="row">
+        @if (Model == null || Model.Count == 0)
+        {
+            <div class="col-12 text-center">
+                <div class="alert alert-info">Пока нет доступных рейсов.</div>
+            </div>
+        }
+        else
+        {
+            foreach (var flight in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card border-primary shadow-sm h-100">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="card-title mb-0">✈️ @flight.Country</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>🕒 Вылет:</strong> @flight.DepartureTime.ToString("dd.MM.yyyy HH:mm")</p>
+                            <p><strong>🛩 Самолёт:</strong> @(flight.Airplane?.Name ?? "Нет данных")</p>
+                            <p><strong>🎟 Класс:</strong> @flight.Class</p>
+                            <p><strong>🧳 Багаж:</strong> @flight.Baggage</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a asp-controller="Booking"
+                               asp-action="Create"
+                               asp-route-airplaneId="@flight.AirplaneId"
+                               class="btn btn-outline-primary btn-sm">Забронировать</a>
+
+                            <!-- Кнопки для редактирования и удаления -->
+                            @* <a asp-action="Edit" asp-route-id="@flight.Id" class="btn btn-warning btn-sm mx-1">✏️ Редактировать</a> *@
+                            @* <a asp-action="Delete" asp-route-id="@flight.Id" class="btn btn-danger btn-sm mx-1">🗑 Удалить</a> *@
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <!-- Кнопка для добавления нового рейса -->
+    <div class="text-center mt-4">
+        <a asp-action="Create" class="btn btn-success">➕ Добавить рейс</a>
+    </div>
+</div>
+

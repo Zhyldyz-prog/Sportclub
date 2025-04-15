@@ -1,0 +1,45 @@
+﻿@model Web.Entities.Flight
+
+@{
+    ViewData["Title"] = "Редактирование рейса";
+}
+
+<h2 class="text-center my-4">✏️ Редактирование рейса</h2>
+
+<div class="container">
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group">
+            <label asp-for="Country" class="control-label"></label>
+            <input asp-for="Country" class="form-control" />
+            <span asp-validation-for="Country" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="DepartureTime" class="control-label"></label>
+            <input asp-for="DepartureTime" class="form-control" type="datetime-local" />
+            <span asp-validation-for="DepartureTime" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="AirplaneId" class="control-label"></label>
+            <select asp-for="AirplaneId" class="form-control" asp-items="ViewBag.Airplanes"></select>
+            <span asp-validation-for="AirplaneId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Class" class="control-label"></label>
+            <input asp-for="Class" class="form-control" />
+            <span asp-validation-for="Class" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Baggage" class="control-label"></label>
+            <input asp-for="Baggage" class="form-control" />
+            <span asp-validation-for="Baggage" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    </form>
+</div>

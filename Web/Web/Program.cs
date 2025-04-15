@@ -1,15 +1,16 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
+using Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// 📦 Добавление сервисов
 builder.Services.AddControllersWithViews();
-builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.AddInfrastructureServices(builder.Configuration); // <-- тут регистрируется ApplicationDbContext
 
 builder.Configuration.AddUserSecrets<Program>();
 
-//НОвая часть 
+// 🔐 Настройка аутентификации
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -19,32 +20,42 @@ builder.Services.AddAuthentication(options =>
 .AddCookie()
 .AddGoogle(options =>
 {
-    options.ClientId = builder.Configuration["Google:ClientId"];  
-    options.ClientSecret = builder.Configuration["Google:ClientSecret"]; 
+    options.ClientId = "";
+    options.ClientSecret = "";
     options.CallbackPath = "/signin-google";
 });
 
 var app = builder.Build();
 
-//НОвая часть 
+// 🧨 Вызов сидера (и БД создаётся, и данные добавляются)
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<ApplicationDbContext>();
+}
 
-// Configure the HTTP request pipeline.
+// 📡 Обработка ошибок и HTTPS
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
+// 🔐 Подключение аутентификации
+app.UseAuthentication(); // <-- ОБЯЗАТЕЛЬНО перед UseAuthorization
 app.UseAuthorization();
 
+// 📍 Маршрутизация
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+

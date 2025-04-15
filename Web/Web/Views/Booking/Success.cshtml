@@ -1,0 +1,9 @@
+﻿@{
+    ViewData["Title"] = "Бронирование подтверждено";
+}
+
+<div class="container text-center mt-5">
+    <h2 class="text-success">✅ Бронирование успешно!</h2>
+    <p class="lead">Спасибо, @User.Identity?.Name. Ваш рейс был забронирован.</p>
+    <a asp-controller="Flight" asp-action="Index" class="btn btn-primary mt-3">🏠 На главную</a>
+</div>

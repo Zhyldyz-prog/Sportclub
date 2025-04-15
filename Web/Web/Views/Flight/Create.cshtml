@@ -1,0 +1,48 @@
+﻿@model Web.Entities.Flight
+
+@{
+    ViewData["Title"] = "Создать новый рейс";
+}
+
+<h2 class="text-center my-4">🛫 Создать новый рейс</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <form asp-action="Create" method="post">
+                <div class="form-group">
+                    <label for="Country">Страна назначения</label>
+                    <input type="text" class="form-control" id="Country" name="Country" />
+                </div>
+
+                <div class="form-group">
+                    <label for="DepartureTime">Дата и время вылета</label>
+                    <input type="datetime-local" class="form-control" id="DepartureTime" name="DepartureTime" />
+                </div>
+
+                <div class="form-group">
+                    <label for="AirplaneId">Выберите самолёт</label>
+                    <select class="form-control" id="AirplaneId" name="AirplaneId">
+                        <option value="">Выберите самолёт</option>
+                        @foreach (var airplane in ViewData["AirplaneId"] as SelectList)
+                        {
+                            <option value="@airplane.Value">@airplane.Text</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="Class">Класс</label>
+                    <input type="text" class="form-control" id="Class" name="Class" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Baggage">Багаж</label>
+                    <input type="text" class="form-control" id="Baggage" name="Baggage" />
+                </div>
+
+                <button type="submit" class="btn btn-success btn-block">Создать рейс</button>
+            </form>
+        </div>
+    </div>
+</div>

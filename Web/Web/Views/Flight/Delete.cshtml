@@ -1,0 +1,24 @@
+﻿@model Web.Entities.Flight
+
+@{
+    ViewData["Title"] = "Удаление рейса";
+}
+
+<h2 class="text-center my-4">🗑 Удалить рейс</h2>
+
+<div class="container">
+    <div class="alert alert-danger">
+        <h4>Вы уверены, что хотите удалить этот рейс?</h4>
+        <p><strong>Страна назначения:</strong> @Model.Country</p>
+        <p><strong>Время вылета:</strong> @Model.DepartureTime.ToString("dd.MM.yyyy HH:mm")</p>
+        <p><strong>Самолёт:</strong> @Model.Airplane?.Name ?? "Нет данных"</p>
+        <p><strong>Класс:</strong> @Model.Class</p>
+        <p><strong>Багаж:</strong> @Model.Baggage</p>
+    </div>
+
+    <form asp-action="DeleteConfirmed" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Да, удалить</button>
+        <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>

@@ -26,5 +26,8 @@ namespace Web.Entities
         [Required(ErrorMessage = "Введите вместимость")]
         [Range(1, 100, ErrorMessage = "Вместимость должна быть от 1 до 100 пассажиров")]
         public int Vmestimost { get; set; }
+
+
+        public List<Flight>? Flights { get; set; }
     }
 }
